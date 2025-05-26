@@ -1,0 +1,25 @@
+body {
+    margin-top: 250px;
+    height: 100vh;
+    display: flow;
+    justify-content: center;
+    align-items: center;
+    background-color: #d7e2f3;
+    font-family: "Roboto Thin", serif;
+}
+
+h2 {
+    margin-top: 150px;
+    text-align: center;
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    padding: 20px;
+    background-color: #b7e0b0;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}

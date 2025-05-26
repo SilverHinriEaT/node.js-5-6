@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Розклад змагань</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <h2 class="h2">Розклад змагань</h2>
+<div class="container">
+  <form method="get" action="/schedule" class="mb-4">
+    <input type="text" name="team" placeholder="Пошук по команді" class="form-control w-50 d-inline">
+    <button type="submit" class="btn btn-info">Пошук</button>
+    <a href="/logout" class="btn btn-secondary">Вийти</a>
+  </form>
+
+  <% if (role === 'admin') { %>
+  <form method="post" action="/schedule/create" class="mb-4">
+    <div class="row mb-2">
+      <div class="col">
+        <input type="text" name="date" placeholder="Дата" class="form-control" required>
+      </div>
+      <div class="col">
+        <input type="text" name="teams" placeholder="Команди через кому" class="form-control" required>
+      </div>
+      <div class="col">
+        <input type="text" name="result" placeholder="Результат (необов'язково)" class="form-control">
+      </div>
+      <div class="col">
+        <button type="submit" class="btn btn-success">Додати гру</button>
+      </div>
+    </div>
+  </form>
+  <% } %>
+
+
+  <ul class="list-group">
+    <% schedule.forEach(item => { %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong><%= item.date %></strong> — <%= item.teams.join(" vs ") %> — <%= item.result || 'Н/Д' %>
+        </div>
+        <% if (role === 'admin') { %>
+        <form method="post" action="/schedule/delete/<%= item.id %>">
+          <button class="btn btn-danger btn-sm">Видалити</button>
+        </form>
+        <% } %>
+      </li>
+    <% }) %>
+  </ul>
+</div>
+  <style>
+    body {
+      margin-top: 250px;
+      height: 100vh;
+      display: flow;
+      justify-content: center;
+      align-items: center;
+      background-color: #d7e2f3;
+      font-family: "Roboto Thin", serif;
+    }
+
+    h2 {
+      margin-top: 150px;
+      text-align: center;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      padding: 20px;
+      background-color: #b7e0b0;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+  </style>
+</body>
+</html>
